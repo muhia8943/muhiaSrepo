@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Muhia Lincorn Samuel — Portfolio</title>
+  <meta name="description" content="Portfolio of Muhia Lincorn Samuel, Computer Science student and software developer from Nairobi, Kenya." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --bg-soft: #0f1522;
+      --card: #121a2a;
+      --text: #e9edf1;
+      --muted: #a8b3c7;
+      --brand: #6ee7ff; /* cyan */
+      --brand-2: #7c4dff; /* purple */
+      --accent: #30e39a; /* green */
+      --ring: rgba(110, 231, 255, 0.45);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius-sm: 14px;
+      --maxw: 1100px;
+    }
+
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 10% -10%, rgba(124,77,255,.25), transparent),
+                  radial-gradient(1000px 700px at 90% 10%, rgba(110,231,255,.18), transparent),
+                  var(--bg);
+    }
+
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 24px; }
+
+    /* Nav */
+    .nav {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: saturate(140%) blur(10px);
+      background: linear-gradient(180deg, rgba(11,15,23,.9), rgba(11,15,23,.6));
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: .3px; }
+    .badge {
+      padding: 6px 10px; border-radius: 999px; background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #001018; font-weight: 700; font-size: 12px; text-transform: uppercase; box-shadow: var(--shadow);
+    }
+    .nav a.btn { text-decoration: none; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; gap: 10px; align-items: center; justify-content: center;
+      padding: 12px 16px; border: 1px solid rgba(255,255,255,.12); color: var(--text);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border-radius: 12px; box-shadow: var(--shadow);
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .btn:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.22); }
+    .btn.primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #051018; border: none; font-weight: 700; }
+    .btn.ghost { background: transparent; border: 1px solid rgba(255,255,255,.16); }
+
+    /* Hero */
+    .hero {
+      padding: 64px 0 28px;
+    }
+    .hero .card {
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: var(--shadow);
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .sparkle {
+      position: absolute; inset: -1px; border-radius: inherit; pointer-events: none;
+      background: radial-gradient(800px 300px at 20% 0%, rgba(124,77,255,.25), transparent),
+                  radial-gradient(800px 300px at 80% 0%, rgba(110,231,255,.20), transparent);
+      mask: linear-gradient(#000, transparent 70%);
+    }
+    .title { font-size: clamp(28px, 6vw, 42px); line-height: 1.1; font-weight: 700; margin: 8px 0 14px; }
+    .subtitle { color: var(--muted); font-weight: 400; font-size: 15px; max-width: 65ch; }
+    .chiprow { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; }
+
+    .chip {
+      padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1); color: var(--muted); font-size: 12.5px;
+    }
+
+    .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+
+    /* Section */
+    section { padding: 38px 0; }
+    .section-title { font-size: 20px; font-weight: 700; margin-bottom: 18px; letter-spacing: .2px; }
+
+    .grid { display: grid; gap: 16px; }
+    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (max-width: 900px) { .grid.cols-3 { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) { .grid.cols-3, .grid.cols-2 { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Education */
+    .edu {
+      position: relative; padding-left: 22px;
+    }
+    .edu:before {
+      content: ""; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(var(--brand), transparent);
+    }
+    .edu-item { position: relative; padding-left: 16px; margin-bottom: 12px; }
+    .edu-item:before { content: ""; position: absolute; left: -6px; top: 8px; width: 10px; height: 10px; border-radius: 999px; background: var(--brand); box-shadow: 0 0 0 3px var(--ring); }
+    .edu .where { font-weight: 600; }
+    .edu .meta { color: var(--muted); font-size: 13px; }
+
+    /* Skills */
+    .skills .tag { padding: 10px 12px; border-radius: 12px; background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.08); font-weight: 500; }
+    .skills .group { display: grid; gap: 10px; }
+
+    /* Projects */
+    .project { display: grid; gap: 10px; }
+    .project .name { font-weight: 700; font-size: 17px; }
+    .project .desc { color: var(--muted); font-size: 14px; }
+    .project .links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+    .pill { font-size: 12px; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
+      color: var(--muted);
+    }
+
+    /* Footer */
+    footer { padding: 28px 0 60px; color: var(--muted); font-size: 13px; }
+
+    /* Util */
+    .muted { color: var(--muted); }
+    .row { display: flex; gap: 12px; align-items: center; }
+    .between { justify-content: space-between; }
+  </style>
+</head>
+<body>
+  <!-- Top Nav -->
+  <div class="nav">
+    <div class="wrap row between">
+      <div class="brand">
+        <span class="badge">Portfolio</span>
+        <span>Muhia Lincorn Samuel</span>
+      </div>
+      <div class="row" style="flex-wrap: wrap;">
+        <a class="btn ghost" href="#projects">Projects</a>
+        <a class="btn ghost" href="#skills">Skills</a>
+        <a class="btn ghost" href="#education">Education</a>
+        <a class="btn" href="mailto:nmmuhia@gmail.com">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <header class="wrap hero">
+    <div class="card">
+      <div class="sparkle"></div>
+      <div class="badge">Computer Science • Nairobi, Kenya</div>
+      <h1 class="title">Hi, I’m <span style="background: linear-gradient(135deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent;">Muhia Lincorn Samuel</span>.</h1>
+      <p class="subtitle">A computer science student passionate about building user‑centric web apps. I enjoy working across the stack—<strong>Node.js/Express</strong> on the backend, <strong>Angular/React</strong> on the frontend, and <strong>MSSQL</strong> for data. Currently polishing my projects and preparing for graduation.</p>
+
+      <div class="chiprow">
+        <span class="chip">Available for internships & entry‑level roles</span>
+        <span class="chip">Open to collaborations</span>
+      </div>
+
+      <div class="cta">
+        <a class="btn primary" href="mailto:nmmuhia@gmail.com">Email Me</a>
+        <a class="btn" href="tel:+254112958889">Call: +254 112 958 889</a>
+        <a class="btn" href="https://github.com/muhia8943" target="_blank" rel="noopener">GitHub</a>
+      </div>
+
+      <div class="chiprow" style="margin-top: 18px;">
+        <span class="pill">Nairobi, Kenya</span>
+        <span class="pill">Portfolio • CV</span>
+        <span class="pill">Email: nmmuhia@gmail.com</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Projects -->
+  <main class="wrap">
+    <section id="projects">
+      <div class="section-title">Featured Projects</div>
+      <div class="grid cols-3">
+        <!-- Project 1 -->
+        <article class="card project">
+          <div class="name">Unitask — Freelance Platform</div>
+          <p class="desc">Final year project: a web app that streamlines applying for online jobs and addresses challenges in the freelancing ecosystem. Built with <strong>Node.js</strong>, <strong>Express.js</strong>, <strong>Angular</strong>, and <strong>MSSQL</strong>. Currently in testing before deployment.</p>
+          <div class="links">
+            <a class="btn" href="https://github.com/muhia8943/freelance" target="_blank" rel="noopener">View Repo</a>
+            <span class="pill">Node.js</span>
+            <span class="pill">Express</span>
+            <span class="pill">Angular</span>
+            <span class="pill">MSSQL</span>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="card project">
+          <div class="name">Shopie — Online Shop</div>
+          <p class="desc">Collaborative e‑commerce web application for buying and selling. Contributed to features and UI polish in a small team.</p>
+          <div class="links">
+            <a class="btn" href="https://github.com/Panther-12/Shopie" target="_blank" rel="noopener">View Repo</a>
+            <span class="pill">JavaScript</span>
+            <span class="pill">Node.js</span>
+            <span class="pill">Frontend</span>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="card project">
+          <div class="name">Voice Portfolio — Client Site</div>
+          <p class="desc">A personal portfolio for a voice‑over artist to showcase demos for adverts and podcasts. Designed and built for clarity and speed.</p>
+          <div class="links">
+            <a class="btn" href="https://muhia8943.github.io/fel.github.io/" target="_blank" rel="noopener">Live Demo</a>
+            <span class="pill">HTML</span>
+            <span class="pill">CSS</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="skills">
+      <div class="section-title">Skills</div>
+      <div class="grid cols-3">
+        <div class="card group">
+          <div class="muted" style="font-weight:600;">Databases</div>
+          <div class="grid cols-2">
+            <div class="tag">MSSQL</div>
+            <div class="tag">MongoDB</div>
+            <div class="tag">MySQL</div>
+            <div class="tag">SQL</div>
+          </div>
+        </div>
+        <div class="card group">
+          <div class="muted" style="font-weight:600;">Languages</div>
+          <div class="grid cols-2">
+            <div class="tag">JavaScript</div>
+            <div class="tag">TypeScript</div>
+            <div class="tag">Python</div>
+            <div class="tag">PHP</div>
+            <div class="tag">HTML</div>
+            <div class="tag">CSS</div>
+          </div>
+        </div>
+        <div class="card group">
+          <div class="muted" style="font-weight:600;">Frameworks & Tools</div>
+          <div class="grid cols-2">
+            <div class="tag">Express (Node.js)</div>
+            <div class="tag">React.js</div>
+            <div class="tag">Angular</div>
+            <div class="tag">Git & GitHub</div>
+            <div class="tag">Azure DevOps</div>
+            <div class="tag">Docker</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+      <div class="section-title">Education</div>
+      <div class="card edu">
+        <div class="edu-item">
+          <div class="where">BSc Computer Science — Chuka University</div>
+          <div class="meta">Sep 2021 – 2025 (awaiting graduation)</div>
+        </div>
+        <div class="edu-item">
+          <div class="where">Teach2Give — Software Development Program</div>
+          <div class="meta">May 2024 – July 2025 • Certificate <a href="https://1drv.ms/i/c/4ea6c72c9212b7fa/EdPwVIxe3x9PmN7ojZf1LgwB9iz_OCCkpIN2Gduh0dhVUQ" target="_blank" rel="noopener">view</a></div>
+        </div>
+        <div class="edu-item">
+          <div class="where">Computer Packages — Jedah Institute of Computer Studies</div>
+          <div class="meta">Foundational computer applications training</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="section-title">Get in Touch</div>
+      <div class="card" style="display:flex; gap:14px; flex-wrap:wrap; align-items:center; justify-content:space-between;">
+        <div>
+          <div style="font-weight:600;">Let’s build something great together.</div>
+          <div class="muted">I’m open to internships, entry‑level roles, and collaborations.</div>
+        </div>
+        <div class="row" style="flex-wrap:wrap;">
+          <a class="btn primary" href="mailto:nmmuhia@gmail.com">Email</a>
+          <a class="btn" href="tel:+254112958889">WhatsApp / Call</a>
+          <a class="btn" href="https://github.com/muhia8943" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <div class="row between" style="flex-wrap:wrap; gap:10px;">
+      <div>© <span id="y"></span> Muhia Lincorn Samuel • Nairobi, Kenya</div>
+      <div class="muted">Built with HTML & CSS</div>
+    </div>
+  </footer>
+
+  <!-- Tiny inline script only to update year; feel free to remove -->
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
